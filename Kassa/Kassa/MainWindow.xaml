@@ -20,7 +20,9 @@
         <ListView Name="Ostukorv_List" HorizontalAlignment="Left" Height="269" Margin="10,31,0,0" VerticalAlignment="Top" Width="161">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn Header="Nimetus" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Kogus" DisplayMemberBinding="{Binding Quantity}"/>
+                    <GridViewColumn Header="Hind" DisplayMemberBinding="{Binding Price}"/>
                 </GridView>
             </ListView.View>
         </ListView>
