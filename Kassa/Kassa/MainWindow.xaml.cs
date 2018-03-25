@@ -40,19 +40,35 @@ namespace Kassa
         {
             if (Convert.ToDouble(ProductPrice.Text) > 0)
             {
-                Ostukorv_List.Items.Add(new Ostukorv { Name = ProductName.Text, Price = int.Parse(ProductPrice.Text), Quantity = int.Parse(ProductQuantity.Text) });
-                List.Add(new Ostukorv { Name = ProductName.Text, Price = int.Parse(ProductPrice.Text), Quantity = int.Parse(ProductQuantity.Text) });
+                var samad = List.Where(x => string.Equals(x.Name, ProductName.Text, StringComparison.CurrentCulture));
+
+                if (samad.Any())
+                {
+                    foreach (var item in List)
+                    {
+                        if (item.Name == ProductName.Text)
+                        {
+                            item.Quantity += 1;
+                        }
+                    }
+                }
+                else
+	            {
+                    Ostukorv_List.Items.Add(new Ostukorv { Name = ProductName.Text, Price = int.Parse(ProductPrice.Text), Quantity = int.Parse(ProductQuantity.Text) });
+                    List.Add(new Ostukorv { Name = ProductName.Text, Price = int.Parse(ProductPrice.Text), Quantity = int.Parse(ProductQuantity.Text) }); 
+                }
             }
         }
 
         private void Eemalda_Click(object sender, RoutedEventArgs e)
         {
-
+            Ostukorv_List.Items.Remove(Ostukorv_List.SelectedItem);
         }
 
         private void Osta_Click(object sender, RoutedEventArgs e)
         {
-
+            var buy = new Buy();
+            buy.Price(List);
         }
     }
 }
