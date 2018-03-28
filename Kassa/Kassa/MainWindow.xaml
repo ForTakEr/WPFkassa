@@ -7,17 +7,26 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid RenderTransformOrigin="0.5,0.5">
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="221,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Name="ProductQuantity"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="221,174,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Name="ProductPrice"/>
+        <TextBox HorizontalAlignment="Left" Height="31" Margin="451,224,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30" Name="ProductQuantity"/>
+        <TextBox HorizontalAlignment="Left" Height="31" Margin="221,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" Name="ProductPrice"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="221,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="234" Name="ProductName"/>
-        <Button Content="Lisa" HorizontalAlignment="Left" Margin="423,120,0,0" VerticalAlignment="Top" Width="75" Click="Lisa_Click"/>
-        <Button Content="Eemalda" HorizontalAlignment="Left" Margin="423,159,0,0" VerticalAlignment="Top" Width="75" Click="Eemalda_Click"/>
+        <Button Content="Lisa" HorizontalAlignment="Left" Margin="380,72,0,0" VerticalAlignment="Top" Width="75" Click="Lisa_Click"/>
+        <Button Content="Eemalda" HorizontalAlignment="Left" Margin="380,111,0,0" VerticalAlignment="Top" Width="75" Click="Eemalda_Click"/>
         <Label Content="Nimetus:" HorizontalAlignment="Left" Margin="214,10,0,0" VerticalAlignment="Top"/>
-        <Label Content="Kogus:" HorizontalAlignment="Left" Margin="214,94,0,0" VerticalAlignment="Top"/>
-        <Label Content="Hind:" HorizontalAlignment="Left" Margin="214,148,0,0" VerticalAlignment="Top"/>
-        <Button Content="Osta" HorizontalAlignment="Left" Margin="241,280,0,0" VerticalAlignment="Top" Width="75" Click="Osta_Click"/>
-        <Label Content="Ostukorv:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
-        <ListView Name="Ostukorv_List" HorizontalAlignment="Left" Height="269" Margin="10,31,0,0" VerticalAlignment="Top" Width="161">
+        <Label Content="Kogus:" HorizontalAlignment="Left" Margin="436,193,0,0" VerticalAlignment="Top"/>
+        <Label Content="Hind:" HorizontalAlignment="Left" Margin="221,69,0,0" VerticalAlignment="Top"/>
+        <Button Content="Osta" HorizontalAlignment="Left" Margin="423,285,0,0" VerticalAlignment="Top" Width="75" Click="Osta_Click"/>
+        <Label Content="Pood:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top"/>
+        <ListView Name="Pood_List" HorizontalAlignment="Left" Height="112" Margin="10,31,0,0" VerticalAlignment="Top" Width="161">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Nimetus" DisplayMemberBinding="{Binding Name}"/>
+                    <GridViewColumn Header="Hind" DisplayMemberBinding="{Binding Price}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label Content="Korv:" HorizontalAlignment="Left" Margin="10,148,0,0" VerticalAlignment="Top"/>
+        <ListView Name="Korv_List" HorizontalAlignment="Left" Height="121" Margin="10,179,0,0" VerticalAlignment="Top" Width="161">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Nimetus" DisplayMemberBinding="{Binding Name}"/>
@@ -26,6 +35,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <Button Content="Pane korvi" HorizontalAlignment="Left" Margin="423,260,0,0" VerticalAlignment="Top" Width="75" Click="pKorv_Click"/>
 
     </Grid>
 </Window>

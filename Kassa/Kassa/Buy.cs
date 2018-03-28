@@ -22,7 +22,7 @@ namespace Kassa
             }
 
             File.WriteAllLines("Receipt.txt", Text);
-            File.AppendAllText("Receipt.txt", "----------------" + Environment.NewLine + "Kokku läks: {0}€" + price);
+            File.AppendAllText("Receipt.txt", "----------------" + Environment.NewLine + "Kokku läks: " + price + " €");
 
             Process.Start("Receipt.txt");
         }

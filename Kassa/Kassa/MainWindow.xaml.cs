@@ -20,12 +20,14 @@ namespace Kassa
     /// </summary>
     public partial class MainWindow : Window
     {
-        public List<Ostukorv> List { get; private set; }
+        public List<Ostukorv> PoeList { get; private set; }
+        public List<Ostukorv> OstuList { get; private set; }
 
         public MainWindow()
         {
             InitializeComponent();
-            List = new List<Ostukorv>();
+            OstuList = new List<Ostukorv>();
+            PoeList = new List<Ostukorv>();
         }
 
 
@@ -38,37 +40,60 @@ namespace Kassa
 
         private void Lisa_Click(object sender, RoutedEventArgs e)
         {
-            if (Convert.ToDouble(ProductPrice.Text) > 0)
+            var samad = PoeList.FirstOrDefault(x => x.Name.Contains(ProductName.Text));
+            if (Convert.ToDouble(ProductPrice.Text) > 0 && samad == null)
             {
-                var samad = List.Where(x => string.Equals(x.Name, ProductName.Text, StringComparison.CurrentCulture));
+               PoeList.Add(new Ostukorv { Name = ProductName.Text, Price = int.Parse(ProductPrice.Text)});
 
-                if (samad.Any())
-                {
-                    foreach (var item in List)
-                    {
-                        if (item.Name == ProductName.Text)
-                        {
-                            item.Quantity += 1;
-                        }
-                    }
-                }
-                else
-	            {
-                    Ostukorv_List.Items.Add(new Ostukorv { Name = ProductName.Text, Price = int.Parse(ProductPrice.Text), Quantity = int.Parse(ProductQuantity.Text) });
-                    List.Add(new Ostukorv { Name = ProductName.Text, Price = int.Parse(ProductPrice.Text), Quantity = int.Parse(ProductQuantity.Text) }); 
-                }
+                Pood_List.ItemsSource = null;
+                Pood_List.ItemsSource = PoeList;
             }
+            else
+            {
+                MessageBox.Show("Sellise nimega toode on juba olemas");
+            }
+            ProductName.Text = "";
+            ProductPrice.Text = "";
         }
 
         private void Eemalda_Click(object sender, RoutedEventArgs e)
         {
-            Ostukorv_List.Items.Remove(Ostukorv_List.SelectedItem);
+            int EemaldusKoht = Korv_List.SelectedIndex;
+
+            if (EemaldusKoht > -1)
+            {
+                OstuList.RemoveAt(EemaldusKoht);
+
+                Korv_List.ItemsSource = null;
+                Korv_List.ItemsSource = OstuList;
+            }
         }
 
         private void Osta_Click(object sender, RoutedEventArgs e)
         {
             var buy = new Buy();
-            buy.Price(List);
+            buy.Price(OstuList);
+        }
+
+        private void pKorv_Click(object sender, RoutedEventArgs e)
+        {
+            var matches = OstuList.Where(p => String.Equals(p.Name, PoeList[Pood_List.SelectedIndex].Name, StringComparison.CurrentCulture));
+
+            if (matches.Any())
+            {
+                foreach (var item in matches)
+                {
+                    item.Quantity += int.Parse(ProductQuantity.Text);
+                }
+                Korv_List.ItemsSource = null;
+                Korv_List.ItemsSource = OstuList;
+            }
+            else
+            {
+                OstuList.Add(PoeList[Pood_List.SelectedIndex]);
+
+                OstuList[OstuList.Count - 1].Quantity = int.Parse(ProductQuantity.Text);
+            }
         }
     }
 }
