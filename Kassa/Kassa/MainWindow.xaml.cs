@@ -66,6 +66,8 @@ namespace Kassa
 
                 Korv_List.ItemsSource = null;
                 Korv_List.ItemsSource = OstuList;
+
+                MessageBox.Show("Toode on ostukorvist eemaldatud");
             }
         }
 
