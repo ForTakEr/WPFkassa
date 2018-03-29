@@ -17,7 +17,7 @@ namespace Kassa
             double price = 0;
             foreach (var item in List)
             {
-                Text.Add(string.Format("{0}x {1} - €{2}", Convert.ToString(item.Quantity), item.Name, item.Price));
+                Text.Add(string.Format("{0}x {1} - €{2}/tk", Convert.ToString(item.Quantity), item.Name, item.Price));
                 price += item.Price * item.Quantity;
             }
 
